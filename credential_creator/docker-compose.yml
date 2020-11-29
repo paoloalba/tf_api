@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+
+  application:
+    build: ./
+    image: credentials_creator:latest
+    container_name: credentials_creator
+    volumes:
+        - <host_shared_storage_path>:/app/sharedstorage/
+    environment:
+      - create_verifier
+      - create_server
+      - verifier_name
+      - verifier_country
+      - ca_key_name
+      - ca_cert_name
+      - server_name
+      - server_country
+      - server_key_name
+      - server_cert_name
+      - server_autosigned_cert_name
+      - server_serial
+      - client_name
+      - client_country
+      - client_key_name
+      - client_cert_name
+      - client_signed_cert_name
+      - client_serial
+      - bundled_client_certificate_name
+      - bundle_password
