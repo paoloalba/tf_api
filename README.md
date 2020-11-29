@@ -8,13 +8,13 @@ Images are stored in order to perform a regular reinforcment learning for the ca
 
 The whole application is implemented within the Flask framework, with the addition of gunicorn and an Nginx reverse proxying for improved security and use of SSL protocols.
 The Nginx is configured to work both with a local run of the docker instances, or to run on a K8s cluster.
-For a deployment on a K8s cluster please refer to https://github.com/paoloalba/k8s_deployer.
+For a deployment on a K8s cluster please refer to https://github.com/paoloalba/deployer_k8s.
 
-The application can also be used to perform some light-learning, in order to easily extend your training data set (see https://github.com/paoloalba/tf_model_dev/blob/main/app/helpers/prediction_handler.py)
+The application can also be used to perform some light-learning, in order to easily extend your training data set (see https://github.com/paoloalba/dev_tf_model/blob/master/app/helpers/prediction_handler.py)
 
 ### Train your model
 
-To reproduce the steps to generate the card detector model, or to train your own, please refer to https://github.com/paoloalba/tf_model_dev
+To reproduce the steps to generate the card detector model, or to train your own, please refer to https://github.com/paoloalba/dev_tf_model
 
 ### Build and run
 
