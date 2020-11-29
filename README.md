@@ -27,6 +27,8 @@ The application can also be used to perform some light-learning, in order to eas
 
 The web app is mobile compatible.
 
+Bulma CSS is employed for html styling (https://bulma.io/),
+
 ### Train your model
 
 To reproduce the steps to generate the card detector model, or to train your own, please refer to https://github.com/paoloalba/dev_tf_model
