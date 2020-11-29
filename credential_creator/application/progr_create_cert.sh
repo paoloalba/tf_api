@@ -22,7 +22,7 @@ fi
 
 if [[ ! -z ${create_server} ]]; then
     printf "Creating server certificate\n"
-    openssl genrsa -out ${server_key_name} 1024
+    openssl genrsa -out ${server_key_name} 2048
     openssl req -new \
                 -subj "/C=${server_country}/CN=${server_name}" \
                 -key ${server_key_name} -out ${server_cert_name}
