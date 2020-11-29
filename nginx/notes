@@ -1,0 +1,8 @@
+remember that for firefox you need a refresh everytime that you update your server/verifier certificate
+this seems to be a bug, i.e. there is some cache that is responsible for the crosscheck of the certificate, and it is not clear
+how to remove it
+
+to refresh firefox:
+1. click on help
+2. click on troubleshooting
+3. click refresh
