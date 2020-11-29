@@ -4,6 +4,9 @@ In the repository you will find an example of web app for the deployment of an o
 In the specific I implement a card detector for sicilian cards (https://it.wikipedia.org/wiki/Carte_da_gioco_italiane), and I implement an application for storage and tracking of sicilian card games (scopa, briscola and tivitti).
 
 The user can login with given credentials, then start a game and submit all the game steps to a database.
+
+![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/home_page.jpg?raw=true)
+
 Images are stored in order to perform a regular reinforcment learning for the card detector model, and in the future to train a recommendation engine for the next move to play on a game.
 
 The whole application is implemented within the Flask framework, with the addition of gunicorn and an Nginx reverse proxying for improved security and use of SSL protocols.
