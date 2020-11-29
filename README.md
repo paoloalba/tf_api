@@ -3,9 +3,19 @@
 In the repository you will find an example of web app for the deployment of an object detection TF model.
 In the specific I implement a card detector for sicilian cards (https://it.wikipedia.org/wiki/Carte_da_gioco_italiane), and I implement an application for storage and tracking of sicilian card games (scopa, briscola and tivitti).
 
-The user can login with given credentials, then start a game and submit all the game steps to a database.
-
 ![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/home_page.jpg?raw=true)
+
+The user can login with given credentials and then start a game.
+
+![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/start_game.jpg?raw=true)
+
+During the game the user can use its camera (selectable from the available ones from the device) to take pictures of the cards from the current round. Cards are then recognised and the output is stored in the page ready for submit. The user can also review the detected cards before submission to the database.
+
+![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/taken_picture.png?raw=true)
+
+The app stays ready for the next steps. Once the game is finished, the "End Game" button will close the game from the database and redirect the user to start a new game.
+
+![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/submit_next.png?raw=true)
 
 Images are stored in order to perform a regular reinforcment learning for the card detector model, and in the future to train a recommendation engine for the next move to play on a game.
 
@@ -13,7 +23,9 @@ The whole application is implemented within the Flask framework, with the additi
 The Nginx is configured to work both with a local run of the docker instances, or to run on a K8s cluster.
 For a deployment on a K8s cluster please refer to https://github.com/paoloalba/deployer_k8s.
 
-The application can also be used to perform some light-learning, in order to easily extend your training data set (see https://github.com/paoloalba/dev_tf_model/blob/master/app/helpers/prediction_handler.py)
+The application can also be used to perform some light-learning, in order to easily extend your training data set (see https://github.com/paoloalba/dev_tf_model/blob/master/app/helpers/prediction_handler.py) and then improve the model.
+
+The web app is mobile compatible.
 
 ### Train your model
 
