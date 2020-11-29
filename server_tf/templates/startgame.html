@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column">
+  <div class="box">
+    <h1>
+      Submit Game Starting Info
+    </h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification is-danger">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <form id="formStartInfo" method="POST" action="/game">
+      <div class="field">
+        <label class="label is-fullwidth">Game Name</label>
+        <div class="control">
+          <input class="input is-large" id="gameName" name="gameName" placeholder="Insert a name to identify the game.">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label is-fullwidth">Game Type</label>
+        <div class="control">
+          <div class="select is-multiple is-fullwidth">
+            <select multiple size="1" id="gameType" name="gameType">
+              <option value="Scopa">Scopa</option>
+              <option value="Briscola">Briscola</option>
+              <option value="Tivitti">Tivitti</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button class="button is-block is-info is-large is-fullwidth">Start</button> 
+    </form>
+  </div>
+</div>
+{% endblock %}

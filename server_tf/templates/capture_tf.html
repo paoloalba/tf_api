@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="columns is-vcentered">
+  <div class="column">
+    <div class="box" id="leftbox">
+      <h1>
+        Your Source Video
+      </h1>
+      <div class="camera">
+        <div class="select">
+          <label for="videoSource">Video source: </label>
+          <select id="videoSource"></select>
+        </div>
+        <video id="video" playsinline autoplay></video>
+        <button id="takebutton" class="button is-block is-info is-large is-fullwidth">Take Photo</button> 
+      </div>
+      <canvas id="canvas" style="display:none"></canvas>
+      <canvas id="canvas2" style="display:none"></canvas>
+      <div class="output">
+        <img id="takenphoto">
+        <img id="originalTakenPhoto" style="display:none"> 
+      </div>
+      <div id="time">
+        00:00:00
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="box" id="rightbox">
+      <h1 id="showGameName">
+        You are playing "{{ gameName }}" 
+      </h1>
+      <h1 id="showGameStep"></h1>
+      <form id="formInfo">
+        <div class="field">
+            <div class="control">
+                <input class="input is-large" id="cardsInfo" name="cardsInfo" placeholder="Cards Info">
+            </div>
+        </div>
+        <div class="field">
+          <label class="label is-fullwidth">Player</label>
+          <div class="control">
+            <div class="select is-multiple is-fullwidth">
+              <select multiple size="1" id="gamePlayer" name="gamePlayer">
+                <option value="Me">Me</option>
+                <option value="Table">Table</option>
+                <option value="Opponent">Opponent</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+      <button id="submitbutton" class="button is-info is-large is-fullwidth">Submit</button>
+
+      <!-- <button id="endbutton" class="button is-block is-info is-large is-fullwidth">End Game</button>  -->
+      <form action="/startgame" method="get">
+        <input type="submit" value="End Game" id="endbutton" class="input is-info is-large is-fullwidth"/>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+<script type = "text/javascript" src="{{url_for('static',filename='webrtc/capture_tf.js')}}"></script>
+{% endblock %}
