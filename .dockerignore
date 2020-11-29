@@ -1,0 +1,6 @@
+.DS_Store
+permanent_storage/*
+
+siciliancards/*
+az_pmt_storage/*
+azure_stuff/*
