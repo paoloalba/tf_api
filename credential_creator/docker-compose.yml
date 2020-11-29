@@ -6,7 +6,7 @@ services:
     image: credentials_creator:latest
     container_name: credentials_creator
     volumes:
-        - <host_shared_storage_path>:/app/sharedstorage/
+        - ${permanent_storage}:/app/sharedstorage/
     environment:
       - create_verifier
       - create_server
