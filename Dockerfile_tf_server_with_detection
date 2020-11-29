@@ -1,0 +1,39 @@
+FROM tensorflow/tensorflow:latest-gpu
+
+RUN apt-get update
+RUN apt-get install -y autoconf automake libtool curl make g++ unzip
+RUN apt-get install -y protobuf-compiler
+RUN apt-get install 'ffmpeg'\
+    'libsm6'\ 
+    'libxext6'  -y
+
+COPY ./tf_model_research /tf_research
+
+WORKDIR /tf_research/
+RUN protoc object_detection/protos/*.proto --python_out=.
+RUN cp object_detection/packages/tf2/setup.py .
+RUN python -m pip install --use-feature=2020-resolver .
+
+RUN pip install flask
+RUN pip install gunicorn
+
+RUN pip install flask-sqlalchemy flask-login
+RUN pip install flask-user email-validator
+
+RUN pip install Pillow
+RUN pip install opencv-python
+RUN pip install psycopg2-binary
+
+RUN mkdir -p /app/
+
+ADD tf_models /app/tf_models
+
+WORKDIR /app/
+
+ADD server_tf /app/server_project
+COPY gunicorn_conf.py /app/gunicorn_conf.py
+COPY run_tf_server_with_detection.sh /app/run_server.sh
+
+RUN chmod +x ./run_server.sh
+
+ENTRYPOINT ["./run_server.sh"]

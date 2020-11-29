@@ -1,0 +1,51 @@
+version: '3.4'
+services:
+
+  tfserver:
+    # build: ./
+    build:
+      context: .
+      dockerfile: ${dockerfile_src}
+    image: ${registry}/${repositoryName}:${versionNumber}
+    container_name: tfserver
+    volumes:
+        - ${permanent_storage}:/mnt/mounted_volume/permanentstorage/
+    #the first one is the port that I have to use from the browser
+    #the second port is the one declared in the run
+    ports:
+        # - "5000:5000"
+        - mode: host
+          protocol: tcp
+          published: 5000
+          target: 5000
+    environment:
+        - IS_DOCKER
+        - FORCE_NEW_DB=y
+        - SQLITE_DB_NAME=sicilian_cards_game
+        - ADMIN_PASSWORD=<your_password>
+        - SERVER_SECRET_KEY=<your_secret_key>
+        - CARD_DETECTOR_MODEL=efficientnet_b2_ckpt_39
+        #this variable forces python to flush stdout
+        - PYTHONUNBUFFERED=1
+
+  nginx:
+    build: ./nginx
+    # image: tf_server:nginx
+    image: ${registry}/${repositoryName}:nginx
+    container_name: nginx
+    volumes:
+        - ${permanent_storage}:/app/permanentstorage/
+    ports:
+      # - "80:80"
+      - mode: host
+        protocol: tcp
+        published: 443
+        target: 443
+      - mode: host
+        protocol: tcp
+        published: 80
+        target: 80
+    # network_mode: "host"
+    # networks:
+    #     mynetwork:
+    #         ipv4_address: 10.5.0.6
