@@ -7,15 +7,15 @@ In the specific I implement a card detector for sicilian cards (https://it.wikip
 
 The user can login with given credentials and then start a game.
 
-![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/start_game.jpg?raw=true)
+<img src="https://github.com/paoloalba/tf_api/blob/master/readme_imgs/start_game.jpg">
 
 During the game the user can use its camera (selectable from the available ones from the device) to take pictures of the cards from the current round. Cards are then recognised and the output is stored in the page ready for submit. The user can also review the detected cards before submission to the database.
 
-![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/taken_picture.png?raw=true)
+<img src="https://github.com/paoloalba/tf_api/blob/master/readme_imgs/taken_picture.png">
 
 The app stays ready for the next steps. Once the game is finished, the "End Game" button will close the game from the database and redirect the user to start a new game.
 
-![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/submit_next.png?raw=true)
+<img src="https://github.com/paoloalba/tf_api/blob/master/readme_imgs/submit_next.png">
 
 Images are stored in order to perform a regular reinforcment learning for the card detector model, and in the future to train a recommendation engine for the next move to play on a game.
 
