@@ -3,7 +3,7 @@
 In the repository you will find an example of web app for the deployment of an object detection TF model.
 In the specific I implement a card detector for sicilian cards (https://it.wikipedia.org/wiki/Carte_da_gioco_italiane), and I implement an application for storage and tracking of sicilian card games (scopa, briscola and tivitti).
 
-![alt text](https://github.com/paoloalba/tf_api/blob/master/readme_imgs/home_page.jpg?raw=true)
+<img src="https://github.com/paoloalba/tf_api/blob/master/readme_imgs/home_page.jpg">
 
 The user can login with given credentials and then start a game.
 
