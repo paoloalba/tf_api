@@ -22,6 +22,11 @@ class Timer:
         d["hours"], rem =   divmod(rem, 3600)
         d["minutes"], d["feconds"] =   divmod(rem, 60)
         d["seconds"] =   int(d["feconds"])
+
+        d["days"] =     int(d["days"])
+        d["hours"] =    int(d["hours"])
+        d["minutes"] =  int(d["minutes"])
+
         return d
 
     def strfdelta(self, tdelta):
@@ -38,6 +43,14 @@ class Timer:
         return fmt.format(**d)
 
 class EnvVarParser:
+
+    def __init__(self):
+        self.postgres_user_key = "POSTGRES_USER"
+        self.postgres_password_key = "POSTGRES_PASSWORD"
+        self.postgres_host_key = "POSTGRES_HOST"
+        self.postgres_dbname_key = "POSTGRES_DBNAME"
+
+        self.postgres_dict = {}
 
     @staticmethod
     def get_double_from_env(env_string, default_val=None):
@@ -56,3 +69,12 @@ class EnvVarParser:
             return False
         else:
             raise Exception("Unparsable boolean from env variable: {0} -> {1}".format(env_string, os_env_val))
+
+    def get_postgres_info(self):
+        self.postgres_dict["user"] =     os.getenv(self.postgres_user_key, None)
+        self.postgres_dict["password"] = os.getenv(self.postgres_password_key, None)
+        self.postgres_dict["host"] =     os.getenv(self.postgres_host_key, None)
+        self.postgres_dict["name"] =     os.getenv(self.postgres_dbname_key, None)
+
+        return self.postgres_dict
+

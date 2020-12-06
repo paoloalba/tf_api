@@ -5,15 +5,15 @@ from . import db
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
-    email = db.Column(db.String(100, collation='NOCASE'), nullable=False, unique=True)
+    email = db.Column(db.String(100), nullable=False, unique=True)
     email_confirmed_at = db.Column(db.DateTime())
     password = db.Column(db.String(255), nullable=False, server_default='')
-    name = db.Column(db.String(100, collation='NOCASE'))
+    name = db.Column(db.String(100))
 
     # Define the relationship to Role via UserRoles
     roles = db.relationship('Role', secondary='user_roles')
 
-    current_game = db.Column(db.String(100, collation='NOCASE'))
+    current_game = db.Column(db.String(100))
 
     @property
     def roles_names(self):
@@ -58,7 +58,7 @@ class Game(db.Model):
     detected_cards = db.Column(db.String(50))
 
     requested_for = db.relationship('User', secondary='game_users')
-    requested_for_email = db.Column(db.String(100, collation='NOCASE'), nullable=False)
+    requested_for_email = db.Column(db.String(100), nullable=False)
 
     __table_args__ = (UniqueConstraint('name', 'step', 'requested_for_email', name='_name_step_usermail'),
                      )

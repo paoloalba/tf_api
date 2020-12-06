@@ -15,6 +15,9 @@ from logging.config import dictConfig
 from .helpers.generic import EnvVarParser
 
 force_new_db = EnvVarParser.get_boolean_from_env("FORCE_NEW_DB", False)
+is_sqlite_db = EnvVarParser.get_boolean_from_env("IS_SQLITE_DB", True)
+
+env_parser = EnvVarParser()
 
 permanent_storage_path = '/mnt/mounted_volume/permanentstorage/'
 
@@ -68,7 +71,6 @@ class ConfigClass(object):
     SECRET_KEY = os.getenv("SERVER_SECRET_KEY")
 
     # Flask-SQLAlchemy settings
-    is_sqlite_db = True
     if is_sqlite_db:
         # db_base_dir = permanent_storage_path
         db_base_dir = "/app/"
@@ -79,11 +81,7 @@ class ConfigClass(object):
 
         # SQLALCHEMY_ENGINE_OPTIONS = {"connect_args": {'timeout': 45}}
     else:
-        postgres_dict = {}
-        postgres_dict["user"] =     None
-        postgres_dict["password"] = None
-        postgres_dict["host"] =     None
-        postgres_dict["name"] =     None
+        postgres_dict = env_parser.get_postgres_info()
         if postgres_dict['user'] and postgres_dict['password']:
             SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@{}/{}'.format(
                 postgres_dict['user'],
@@ -93,6 +91,9 @@ class ConfigClass(object):
             )
         else:
             SQLALCHEMY_DATABASE_URI = 'postgresql://{}/{}'.format(postgres_dict['host'], postgres_dict['name'])
+
+        msg = "Connecting to Postgres db {name} as user {user}".format(**postgres_dict)
+        logging.info(msg)
 
         SQLALCHEMY_ENGINE_OPTIONS = {"connect_args": {'sslmode': "require"}}
 
@@ -112,7 +113,7 @@ def create_app():
     app.config.from_object(conf_obj)
     # app.config.from_object(__name__+'.ConfigClass')
 
-    if conf_obj.is_sqlite_db:
+    if is_sqlite_db:
         exist_previous_db = False
         if os.path.isfile(conf_obj.db_path):
             exist_previous_db = True
